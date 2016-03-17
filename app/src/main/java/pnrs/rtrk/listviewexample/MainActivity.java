@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
+public class MainActivity extends Activity
+        implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     static final String TAG = MainActivity.class.getSimpleName();
 
@@ -26,6 +28,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         ListView lv = (ListView)findViewById(R.id.listv);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
+
+        findViewById(R.id.button).setOnClickListener(this);
     }
 
     @Override
@@ -37,4 +41,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
     ArrayAdapter<String> adapter;
+
+    @Override
+    public void onClick(View view) {
+        EditText et = (EditText)findViewById(R.id.edit);
+
+        adapter.add(et.getText().toString());
+        et.setText("");
+    }
 }
